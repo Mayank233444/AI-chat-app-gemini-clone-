@@ -10,8 +10,12 @@ const Main = () => {
 
     const {onSent,recentPrompt,showResult,loading,resultData,setinput,input}=useContext(Context);
    
-    const startListening = ()=> SpeechRecognition.startListening({ continuous: true , language:'en-IN'});
-    const { transcript, browserSupportsSpeechRecognition } = useSpeechRecognition();
+    const startListening = () => {
+        setinput("");  // Clear the input field when starting speech recognition
+        resetTranscript(); 
+        SpeechRecognition.startListening({ continuous: true, language: 'en-IN' });
+    };
+    const { transcript, browserSupportsSpeechRecognition , resetTranscript } = useSpeechRecognition();
     useEffect(() => {
         setinput(transcript);
       }, [transcript, setinput]);
